@@ -6,7 +6,7 @@ import ShopPage from "./pages/shop/shop.component";
 import Login from "./pages/login/Login";
 import Contact from "./pages/contact/contact";
 import Header from "./components/header/header.component";
-import { useAuth, AuthProvider } from "./contexts/AuthContext";
+import { useAuth } from "./contexts/AuthContext";
 import SignUp from "./pages/signup/Signup";
 
 const App = () => {
@@ -27,8 +27,8 @@ const App = () => {
       <div>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Login} />
             <Route exact path="/signup" component={SignUp} />
+            <Route path="/" component={Login} />
           </Switch>
         </BrowserRouter>
       </div>
