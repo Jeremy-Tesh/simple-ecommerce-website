@@ -1,29 +1,38 @@
 import React from "react";
 
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 import Homepage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import Login from "./pages/login/Login";
 import Contact from "./pages/contact/contact";
 import Header from "./components/header/header.component";
 import { useAuth, AuthProvider } from "./contexts/AuthContext";
+import SignUp from "./pages/signup/Signup";
 
 const App = () => {
-  // const { currentUser } = useAuth();
-  console.log(useAuth());
-  return (
-    <div>
-      <AuthProvider>
+  const { currentUser } = useAuth();
+  if (currentUser)
+    return (
+      <BrowserRouter>
         <Header />
         <Switch>
           <Route exact path="/" component={Homepage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route path="/login" component={Login} />
-          <Route path="/contact" component={Contact} />
+          <Route exact path="/shop" component={ShopPage} />
+          <Route exact path="/contact" component={Contact} />
         </Switch>
-      </AuthProvider>
-    </div>
-  );
+      </BrowserRouter>
+    );
+  else
+    return (
+      <div>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <Route exact path="/signup" component={SignUp} />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
 };
 
 export default App;
